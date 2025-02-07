@@ -37,12 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <div class="container">
         <form action="index.php?page=register" method="post">
-            <input type="text" name="pseudo" placeholder="Pseudo" required>
-            <input type="password" name="password" placeholder="Mot de passe" required>
+            <input type="email" name="mail" placeholder="E-mail" required>
             <input type="text" name="firstname" placeholder="Prénom" required>
             <input type="text" name="lastname" placeholder="Nom" required>
-            <input type="email" name="mail" placeholder="E-mail" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <select id="role" name="role" required>
+            <option value="client">Client</option>
+            <option value="vendeur">Vendeur</option>
+            </select>
             <button type="submit">S'inscrire</button>
+            <a href="login">Déjà inscrit ?</a>
         </form>
     </div>
 </main>

@@ -1,30 +1,30 @@
 <?php
 
-require_once '../models/userModel.php'; // Inclusion du modèle utilisateur
+require_once '../models/userModel.php';
 
 $user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupération des données du formulaire
-    $pseudo = htmlspecialchars($_POST['pseudo']);
+    $mail = htmlspecialchars($_POST['mail']);
     $password = htmlspecialchars($_POST['password']);
 
     // Vérification des champs vides
-    if (empty($password) || empty($pseudo)) {
+    if (empty($password) || empty($mail)) {
         $error = 'Veuillez remplir tous les champs';
     } else {
         // Tentative de connexion de l'utilisateur
-        $loggedInUser = $user->login($pseudo, $password);
+        $loggedInUser = $user->login($mail, $password);
 
         if ($loggedInUser) {
             // Connexion réussie, redirection vers la page de profil
-            $_SESSION['pseudo'] = $loggedInUser['pseudo'];
+            $_SESSION['mail'] = $loggedInUser['mail'];
 
             header("Location: index.php?page=profile");
             exit();
         } else {
             // Connexion échouée, message d'erreur
-            $error = "Pseudo ou mot de passe incorrect";
+            $error = "mail ou mot de passe incorrect";
         }
     }
 }
@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <div class="container">
         <form action="index.php?page=login" method="post">
-            <input type="text" name="pseudo" placeholder="Pseudo" required> <!-- Champ pseudo -->
-            <input type="password" name="password" placeholder="Password" required> <!-- Champ mot de passe -->
-            <button type="submit">Login</button> <!-- Bouton de soumission -->
+            <input type="text" name="mail" placeholder="mail" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
         </form>
     </div>
 </main>
