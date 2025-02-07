@@ -35,9 +35,24 @@ switch ($page) {
     case 'seller':
         include '../views/seller.php';
         break;
-        case 'sellerProducts':
-            include '../views/sellerProducts.php';
-            break;
+
+    case 'sellerProducts':
+        include '../views/sellerProducts.php';
+        break;
+
+    case 'sellerProfile':
+        include '../views/profile/sellerProfile.php';
+        break;
+
+    case 'adminProfile':
+        include '../views/profile/adminProfile.php';
+        break;
+    case 'logout':
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: index.php?page=login");
+        exit();
 
     default:
         include '../views/home.php';

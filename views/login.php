@@ -1,10 +1,7 @@
 <?php
-// Démarrer la session si ce n'est pas déjà fait
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-// Inclure le modèle utilisateur
 require_once '../models/userModel.php';
 $user = new User();
 
@@ -23,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Connexion réussie, stocker les informations de l'utilisateur dans la session
             $_SESSION['mail'] = $loggedInUser['mail'];
             $_SESSION['role'] = $loggedInUser['role'];
-            $_SESSION['user_id'] = $loggedInUser['id_user']; // Ajouter l'ID de l'utilisateur à la session
+            $_SESSION['user_id'] = $loggedInUser['id_user'];
 
             // Redirection selon le rôle de l'utilisateur
             if ($loggedInUser['role'] === 'vendeur') {
@@ -35,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             exit();
         } else {
-            // Connexion échouée, message d'erreur
             $error = "Mail ou mot de passe incorrect";
         }
     }
