@@ -14,9 +14,11 @@ $products = $productModel->getProducts();
                 <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                 <h2><?php echo htmlspecialchars($product['name']); ?></h2>
                 <p><?php echo htmlspecialchars($product['description']); ?></p>
-                <p><?php echo htmlspecialchars($product['price']); ?> €</p>
-                <a href="index.php?page=product&id=<?php echo $product['id']; ?>">Voir le produit</a>
+                <p><?php echo htmlspecialchars($product['price']); ?> €</p> 
+                <a href="index.php?page=products&id=<?php echo $product['id_product']; ?>">Voir le produit</a>
+
             </div>
         <?php endforeach; ?>
     </div>
 </main>
+

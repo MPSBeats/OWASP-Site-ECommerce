@@ -1,8 +1,9 @@
 <?php
-
 $page = (isset($_GET['page'])) ? $_GET['page'] : 'home';
 $user = (isset($_GET['user'])) ? $_GET['user'] : '';
 
+require_once "../models/productModel.php";
+$productId = isset($_GET['id']) ? $_GET['id'] : null;
 
 switch ($page) {
     case 'home':
@@ -22,9 +23,15 @@ switch ($page) {
         break;
 
     case 'products':
-        include '../views/products.php';
+        if ($productId) {
+            $productModel = new Product();
+            $selectedProduct = $productModel->getProductById($productId);
+            include '../views/productForm.php';
+        } else {
+            include '../views/products.php';
+        }
         break;
-    
+
     case 'seller':
         include '../views/seller.php';
         break;

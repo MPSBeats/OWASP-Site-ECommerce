@@ -4,15 +4,14 @@ require_once "../models/database.php";
 
 $productModel = new Product();
 
-
-if (isset($_GET['product']) && !empty($_GET['product'])) {
-    $selectedProduct = $productModel->getProductById($_GET['product']);
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    // Récupérer le produit par son ID
+    $selectedProduct = $productModel->getProductById($_GET['id']);
     $currentProduct = $title = htmlspecialchars($selectedProduct['name']);
 } else {
     header('Location: index.php?page=products');
     exit();
 }
-
 ?>
 
 <main>
