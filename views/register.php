@@ -4,31 +4,30 @@ require_once '../models/userModel.php';
 $user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pseudo = htmlspecialchars($_POST['pseudo']);
     $password = htmlspecialchars($_POST['password']);
     $firstname = htmlspecialchars($_POST['firstname']);
     $lastname = htmlspecialchars($_POST['lastname']);
     $mail = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL);
-    if (empty($pseudo) || empty($password) || empty($firstname) || empty($lastname) || empty($mail)) {
+    $role = htmlspecialchars($_POST['role']);
+
+    if (empty($password) || empty($firstname) || empty($lastname) || empty($mail) || empty($role)) {
         $error = 'Veuillez remplir tous les champs';
     } elseif (!$mail) {
         $error = 'Adresse e-mail invalide';
     } else {
         // Tentative d'inscription de l'utilisateur
-        $registered = $user->register($pseudo, $password, $firstname, $lastname, $mail);
+        $registered = $user->register($password, $firstname, $lastname, $mail, $role);
 
         if ($registered) {
-            // Inscription réussie, redirection vers la connexion
+            // Inscription réussie, redirection vers la page de connexion
             header("Location: index.php?page=login");
             exit();
         } else {
-            // Inscription échouée, message d'erreur
-            $error = "Erreur lors de l'inscription. Essayez un autre pseudo ou e-mail.";
+            $error = "Erreur lors de l'inscription. Essayez un autre e-mail.";
         }
     }
 }
 ?>
-
 <main class="register">
     <div class="space"></div>
     <h1>Inscription :</h1>
@@ -42,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="lastname" placeholder="Nom" required>
             <input type="password" name="password" placeholder="Mot de passe" required>
             <select id="role" name="role" required>
-            <option value="client">Client</option>
-            <option value="vendeur">Vendeur</option>
+                <option value="client">Client</option>
+                <option value="vendeur">Vendeur</option>
             </select>
             <button type="submit">S'inscrire</button>
             <a href="login">Déjà inscrit ?</a>
