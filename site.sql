@@ -25,8 +25,10 @@ CREATE TABLE Products (
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
     image_url TEXT,
-    FOREIGN KEY (id_product) REFERENCES Categories(id_categorie) ON DELETE SET NULL,
-	FOREIGN KEY (id_product) REFERENCES Users(id_user) ON DELETE SET NULL
+    id_categorie INT,
+    id_user INT,
+    FOREIGN KEY (id_categorie) REFERENCES Categories(id_categorie) ON DELETE SET NULL,
+    FOREIGN KEY (id_user) REFERENCES Users(id_user) ON DELETE CASCADE
 );
 
 CREATE TABLE Support (
