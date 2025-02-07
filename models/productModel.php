@@ -24,6 +24,11 @@ class Product{
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
-
+    public function getProductsBySeller($seller_id)
+{
+    $stmt = $this->pdo->prepare('SELECT * FROM products WHERE id_user = :seller_id');
+    $stmt->execute(['seller_id' => $seller_id]);
+    return $stmt->fetchAll();
+}
 
 }
