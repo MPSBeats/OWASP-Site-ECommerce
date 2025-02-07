@@ -23,7 +23,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <h2><?php echo htmlspecialchars($selectedProduct['name']); ?></h2>
         <p><?php echo htmlspecialchars($selectedProduct['description']); ?></p>
         <p><?php echo htmlspecialchars($selectedProduct['price']); ?> €</p>
-        <p>Vendu par: <?php echo htmlspecialchars($selectedProduct['seller_name']); ?></p>
+        <a href="index.php?page=seller">Vendu par: <?php echo htmlspecialchars($selectedProduct['seller_name']); ?></a>
         <a href="index.php?page=products">Retour à la liste des produits</a>
     </div>
     

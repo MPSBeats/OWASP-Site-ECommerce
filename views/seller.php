@@ -1,7 +1,7 @@
 <?php
-session_start();
-require_once 'Database.php';
-require_once 'Product.php';
+
+require_once '../models/database.php';
+require_once '../models/userModel.php';
 
 $productModel = new Product();
 $products = $productModel->getProducts();
