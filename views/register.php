@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <option value="vendeur">Vendeur</option>
             </select>
             <button type="submit">S'inscrire</button>
-            <a href="login">Déjà inscrit ?</a>
+            <a href="index.php?page=login">Déjà inscrit ?</a>
         </form>
     </div>
 </main>

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Connexion réussie, redirection vers la page de profil
             $_SESSION['mail'] = $loggedInUser['mail'];
 
-            header("Location: index.php?page=profile");
+            header("Location: index.php?page=home");
             exit();
         } else {
             // Connexion échouée, message d'erreur
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <div class="container">
         <form action="index.php?page=login" method="post">
-            <input type="text" name="mail" placeholder="mail" required>
+            <input type="text" name="mail" placeholder="Mail" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
