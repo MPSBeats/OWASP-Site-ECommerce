@@ -30,7 +30,7 @@ class User
         $stmt->execute(['mail' => $mail]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($mail, $user['password'])) {
+        if ($user && password_verify($password, $user['password'])) {
             return $user;
         }
         return false;
