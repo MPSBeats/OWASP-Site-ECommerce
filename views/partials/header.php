@@ -20,6 +20,7 @@ $page = $_GET['page'] ?? 'home';
         <nav>
             <ul>
                 <li><a href="index.php?page=home">Accueil</a></li>
+                <li><a href="index.php?page=products">Produits</a></li>
                 <li><a href="index.php?page=login">Connexion</a></li>
                 <li><a href="index.php?page=register">Inscription</a></li>
                 <li><a href="index.php?page=contact">Contact</a></li>
