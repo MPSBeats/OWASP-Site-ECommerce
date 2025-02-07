@@ -20,7 +20,7 @@ CREATE TABLE Categories (
     description TEXT
 );
 
--- Table Products (corrigé pour utiliser id_vendeur et id_categorie)
+-- Table Products
 CREATE TABLE Products (
     id_product SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
