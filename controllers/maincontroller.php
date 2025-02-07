@@ -26,7 +26,7 @@ switch ($page) {
         if ($productId) {
             $productModel = new Product();
             $selectedProduct = $productModel->getProductById($productId);
-            include '../views/sproductForm.php';
+            include '../views/productForm.php';
         } else {
             include '../views/products.php';
         }
