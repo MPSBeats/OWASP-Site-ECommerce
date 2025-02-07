@@ -1,3 +1,15 @@
+DROP TABLE IF EXISTS Support;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS Categories;
+DROP TABLE IF EXISTS Users;
+
+
+ALTER SEQUENCE users_id_user_seq RESTART WITH 1;
+ALTER SEQUENCE categories_id_categorie_seq RESTART WITH 1;
+ALTER SEQUENCE products_id_product_seq RESTART WITH 1;
+ALTER SEQUENCE support_id_ticket_seq RESTART WITH 1;
+
+
 CREATE TABLE Users (
     id_user SERIAL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
@@ -13,8 +25,8 @@ CREATE TABLE Categories (
     description TEXT
 );
 
-CREATE TABLE Produits (
-    id_produit SERIAL PRIMARY KEY,
+CREATE TABLE Products (
+    id_product SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
