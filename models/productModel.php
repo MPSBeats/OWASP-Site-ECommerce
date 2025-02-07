@@ -24,12 +24,10 @@ class Product{
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne un tableau associatif
     }
-
     public function getProductsBySeller($seller_id)
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM products WHERE id_user = :seller_id');
-        $stmt->execute(['seller_id' => $seller_id]);
-        return $stmt->fetchAll();
-    }
-
+{
+    $stmt = $this->pdo->prepare('SELECT * FROM products WHERE id_vendeur = :seller_id');
+    $stmt->execute(['seller_id' => $seller_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

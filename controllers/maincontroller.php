@@ -26,7 +26,7 @@ switch ($page) {
         if ($productId) {
             $productModel = new Product();
             $selectedProduct = $productModel->getProductById($productId);
-            include '../views/productForm.php';
+            include '../views/sproductForm.php';
         } else {
             include '../views/products.php';
         }
@@ -35,6 +35,9 @@ switch ($page) {
     case 'seller':
         include '../views/seller.php';
         break;
+        case 'sellerProducts':
+            include '../views/sellerProducts.php';
+            break;
 
     default:
         include '../views/home.php';
