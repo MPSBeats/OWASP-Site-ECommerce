@@ -24,22 +24,22 @@ class User
     //     ]);
     // }
 
-    public function login($pseudo, $password)
+    public function login($mail, $password)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE pseudo= :pseudo');
-        $stmt->execute(['pseudo' => $pseudo]);
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE mail= :mail');
+        $stmt->execute(['mail' => $mail]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($mail, $user['password'])) {
             return $user;
         }
         return false;
     }
 
-    public function getUserId($pseudo)
+    public function getUserId($mail)
     {
-        $stmt = $this->pdo->prepare('SELECT id_user FROM users WHERE pseudo= :pseudo');
-        $stmt->execute(['pseudo' => $pseudo]);
+        $stmt = $this->pdo->prepare('SELECT id_user FROM users WHERE mail= :mail');
+        $stmt->execute(['mail' => $mail]);
         return $stmt->fetchColumn();
     }
 
