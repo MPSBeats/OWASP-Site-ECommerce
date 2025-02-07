@@ -11,18 +11,18 @@ class User
         $this->pdo = (new Database())->connect();
     }
 
-    // public function register($password, $firstname, $lastname, $mail,)
-    // {
-    //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    //     $stmt = $this->pdo->prepare('INSERT INTO users ( pseudo, password, firstname, lastname,  mail) VALUES  (:pseudo, :password,:firstname,:lastname, :birth, :country, :mail,:phone,  :picture)');
+    public function register($password, $firstname, $lastname, $mail,)
+    {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->pdo->prepare('INSERT INTO users ( pseudo, password, firstname, lastname,  mail) VALUES  (:pseudo, :password,:firstname,:lastname, :birth, :country, :mail,:phone,  :picture)');
 
-    //     return $stmt->execute([
-    //         'password' => $hashed_password,
-    //         'firstname' => $firstname,
-    //         'lastname' => $lastname,
-    //         'mail' => $mail,
-    //     ]);
-    // }
+        return $stmt->execute([
+            'password' => $hashed_password,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'mail' => $mail,
+        ]);
+    }
 
     public function login($pseudo, $password)
     {
