@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <div class="container">
         <form action="index.php?page=login" method="post">
-            <input type="text" name="mail" placeholder="mail" required>
+            <input type="text" name="mail" placeholder="Mail" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
