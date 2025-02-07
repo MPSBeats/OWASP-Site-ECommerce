@@ -1,15 +1,9 @@
 <?php
-
 require_once '../models/userModel.php';
-
 $user = new User();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupération des données du formulaire
     $mail = htmlspecialchars($_POST['mail']);
     $password = htmlspecialchars($_POST['password']);
-
-    // Vérification des champs vides
     if (empty($password) || empty($mail)) {
         $error = 'Veuillez remplir tous les champs';
     } else {
@@ -17,13 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $loggedInUser = $user->login($mail, $password);
 
         if ($loggedInUser) {
-            // Connexion réussie, redirection vers la page de profil
             $_SESSION['mail'] = $loggedInUser['mail'];
-
-            header("Location: index.php?page=profile");
+            $_SESSION['role'] = $loggedInUser['role'];
+            // Redirection selon le rôle de l'utilisateur
+            if ($loggedInUser['role'] === 'vendeur') {
+                header("Location: index.php?page=sellerProfile");
+            } elseif ($loggedInUser['role'] === 'admin') {
+                header("Location: index.php?page=adminProfile");
+            } else {
+                header("Location: index.php?page=home");
+            }
             exit();
         } else {
-            // Connexion échouée, message d'erreur
             $error = "mail ou mot de passe incorrect";
         }
     }
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="space"></div>
     <h1>Connexion :</h1>
     <?php if (isset($error)): ?>
-        <p class="error"><?php echo htmlspecialchars($error); ?></p> <!-- Affichage du message d'erreur -->
+        <p class="error"><?php echo htmlspecialchars($error); ?></p>
     <?php endif; ?>
     <div class="container">
         <form action="index.php?page=login" method="post">
