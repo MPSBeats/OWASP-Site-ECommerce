@@ -4,19 +4,13 @@ DROP TABLE IF EXISTS Categories;
 DROP TABLE IF EXISTS Users;
 
 
-ALTER SEQUENCE users_id_user_seq RESTART WITH 1;
-ALTER SEQUENCE categories_id_categorie_seq RESTART WITH 1;
-ALTER SEQUENCE products_id_product_seq RESTART WITH 1;
-ALTER SEQUENCE support_id_ticket_seq RESTART WITH 1;
-
-
 CREATE TABLE Users (
     id_user SERIAL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
     mail VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role VARCHAR(20) DEFAULT 'client' CHECK (role IN ('client', 'vendeur'))
+    role VARCHAR(20) DEFAULT 'client' CHECK (role IN ('client', 'vendeur', 'admin'))
 );
 
 CREATE TABLE Categories (
@@ -30,9 +24,9 @@ CREATE TABLE Products (
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
-    stock INT DEFAULT 0,
     image_url TEXT,
-    FOREIGN KEY (id_produit) REFERENCES Categories(id_categorie) ON DELETE SET NULL
+    FOREIGN KEY (id_product) REFERENCES Categories(id_categorie) ON DELETE SET NULL,
+	FOREIGN KEY (id_product) REFERENCES Users(id_user) ON DELETE SET NULL
 );
 
 CREATE TABLE Support (
@@ -42,3 +36,9 @@ CREATE TABLE Support (
     date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_ticket) REFERENCES Users(id_user) ON DELETE CASCADE
 );
+
+
+ALTER SEQUENCE users_id_user_seq RESTART WITH 1;
+ALTER SEQUENCE categories_id_categorie_seq RESTART WITH 1;
+ALTER SEQUENCE products_id_product_seq RESTART WITH 1;
+ALTER SEQUENCE support_id_ticket_seq RESTART WITH 1;
