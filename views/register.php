@@ -1,8 +1,6 @@
 <?php
 require_once '../models/userModel.php';
-
 $user = new User();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = htmlspecialchars($_POST['password']);
     $firstname = htmlspecialchars($_POST['firstname']);

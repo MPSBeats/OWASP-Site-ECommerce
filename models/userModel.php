@@ -11,16 +11,16 @@ class User
         $this->pdo = (new Database())->connect();
     }
 
-    public function register($password, $firstname, $lastname, $mail,)
+    public function register($password, $firstname, $lastname, $mail, $role)
     {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->pdo->prepare('INSERT INTO users ( pseudo, password, firstname, lastname,  mail) VALUES  (:pseudo, :password,:firstname,:lastname, :birth, :country, :mail,:phone,  :picture)');
-
+        $stmt = $this->pdo->prepare('INSERT INTO users (password, firstname, lastname, mail, role) VALUES (:password, :firstname, :lastname, :mail, :role)');
         return $stmt->execute([
             'password' => $hashed_password,
             'firstname' => $firstname,
             'lastname' => $lastname,
             'mail' => $mail,
+            'role' => $role,
         ]);
     }
 
