@@ -12,10 +12,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     header('Location: index.php?page=products');
     exit();
 }
+
 ?>
 
 <main>
     <h1><?php echo $title; ?></h1>
+
     <div class="product">
         <img src="<?php echo htmlspecialchars($selectedProduct['image_url']); ?>" alt="<?php echo htmlspecialchars($selectedProduct['name']); ?>">
         <h2><?php echo htmlspecialchars($selectedProduct['name']); ?></h2>
@@ -24,11 +26,20 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <p>Vendu par: <?php echo htmlspecialchars($selectedProduct['seller_name']); ?></p>
         <a href="index.php?page=products">Retour à la liste des produits</a>
     </div>
+    
     <div class="form">
-        <form action="index.php?page=product&id=<?php echo $selectedProduct['id_product']; ?>" method="post">
+        <form action="index.php?page=products" method="post" id="addToCartForm">
             <label for="quantity">Quantité</label>
             <input type="number" name="quantity" id="quantity" value="1" min="1" max="100">
             <input type="submit" value="Ajouter au panier">
         </form>
     </div>
 </main>
+
+<script>
+    document.getElementById("addToCartForm").addEventListener("submit", function(event) {
+
+        alert("Produit ajouté au panier !");
+
+    });
+</script>

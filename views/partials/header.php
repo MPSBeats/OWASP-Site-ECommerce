@@ -16,7 +16,7 @@ $page = $_GET['page'] ?? 'home';
 
 <body>
     <header>
-        <h1>Bienvenue sur notre boutique</h1>
+        <h1>E-commerce</h1>
         <nav>
             <ul>
                 <li><a href="index.php?page=home">Accueil</a></li>
