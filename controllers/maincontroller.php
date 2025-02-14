@@ -43,6 +43,16 @@ switch ($page) {
     case 'sellerProfile':
         include '../views/profile/sellerProfile.php';
         break;
+    case 'deleteProduct':
+        require_once "../models/productModel.php";
+        $productModel = new Product();
+        if (isset($_POST['id_product'])) {
+            $idProduct = intval($_POST['id_product']);
+            $productModel->deleteProduct($idProduct);
+        }
+        header("Location: index.php?page=sellerProfile");
+        exit();
+        break;
 
     case 'adminProfile':
         include '../views/profile/adminProfile.php';

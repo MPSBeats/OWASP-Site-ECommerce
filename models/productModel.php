@@ -30,4 +30,9 @@ class Product{
     $stmt->execute(['seller_id' => $seller_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+public function deleteProduct($idProduct)
+{
+    $stmt = $this->pdo->prepare("DELETE FROM products WHERE id_product = :id_product");
+    $stmt->execute(['id_product' => $idProduct]);
+}
 }
