@@ -16,13 +16,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'vendeur') {
 </head>
 <body>
     <header>
-        <h1>Bienvenue, Vendeur !</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php?page=manageMyProducts">Mes produits</a></li>
-                <li><a href="index.php?page=addProduct">Ajouter un produit</a></li>
-            </ul>
-        </nav>
+        <h1>Bienvenue, <?= htmlspecialchars($_SESSION['name'] ?? 'Vendeur') ?>!</h1>
         <a href="index.php?page=logout">Déconnexion</a>
     </header>
     <main>

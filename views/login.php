@@ -7,23 +7,22 @@ $user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Nettoyage des données entrées par l'utilisateur
-    $mail = filter_var(trim($_POST['mail']), FILTER_SANITIZE_EMAIL); // Valider et nettoyer l'email
-    $password = trim($_POST['password']); // Nettoyer le mot de passe
+    $mail = filter_var(trim($_POST['mail']), FILTER_SANITIZE_EMAIL);
+    $password = trim($_POST['password']);
 
     if (empty($password) || empty($mail)) {
         $error = 'Veuillez remplir tous les champs';
     } else {
-        // Tentative de connexion de l'utilisateur
         $loggedInUser = $user->login($mail, $password);
-
         if ($loggedInUser) {
-            // Connexion réussie, stocker les informations de l'utilisateur dans la session
+            // Stocker les informations de l'utilisateur dans la session
             $_SESSION['mail'] = $loggedInUser['mail'];
             $_SESSION['role'] = $loggedInUser['role'];
             $_SESSION['user_id'] = $loggedInUser['id_user'];
-
-            // Redirection selon le rôle de l'utilisateur
+            
+            // Pour les vendeurs, enregistrer le nom pour l'afficher
             if ($loggedInUser['role'] === 'vendeur') {
+                $_SESSION['name'] = $loggedInUser['firstname'] . ' ' . $loggedInUser['lastname'];
                 header("Location: index.php?page=sellerProfile");
             } elseif ($loggedInUser['role'] === 'admin') {
                 header("Location: index.php?page=adminProfile");
