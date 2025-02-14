@@ -5,19 +5,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = htmlspecialchars($_POST['password']);
     $firstname = htmlspecialchars($_POST['firstname']);
     $lastname = htmlspecialchars($_POST['lastname']);
-    $mail = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL);
+    $mail = htmlspecialchars($_POST['mail']);
     $role = htmlspecialchars($_POST['role']);
 
     if (empty($password) || empty($firstname) || empty($lastname) || empty($mail) || empty($role)) {
         $error = 'Veuillez remplir tous les champs';
-    } elseif (!$mail) {
+    } elseif (!preg_match('/^(?!.*@.*@)(?!.*\..*\..*)[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]{1,15}\.[a-zA-Z]{2,10}$/i', $mail)) {
         $error = 'Adresse e-mail invalide';
+    } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/', $password)) {
+        $error = 'Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial.';
+    } elseif (!preg_match("/^[a-zA-Z'\\-]{1,50}$/", $firstname)) {
+        $error = 'Le prénom ne peut contenir que des lettres, des tirets et des apostrophes, et doit être inférieur à 50 caractères.';
+    } elseif (!preg_match("/^[a-zA-Z'\\-]{1,50}$/", $lastname)) {
+        $error = 'Le nom ne peut contenir que des lettres, des tirets et des apostrophes, et doit être inférieur à 50 caractères.';
     } else {
-        // Tentative d'inscription de l'utilisateur
         $registered = $user->register($password, $firstname, $lastname, $mail, $role);
 
         if ($registered) {
-            // Inscription réussie, redirection vers la page de connexion
             header("Location: index.php?page=login");
             exit();
         } else {
